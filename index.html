@@ -311,17 +311,17 @@
                     <!-- MARCADOR: DIRECCIÓN FÍSICA -->
                     <div class="flex items-start gap-2">
                         <i data-lucide="map-pin" class="text-amber-400 w-4 h-4 shrink-0 mt-0.5"></i>
-                        <p>[ Dirección de la Iglesia ]</p>
+                        <p>Calle Guayaquil y Paquisha, Santa Elena, Ecuador</p>
                     </div>
                     <!-- MARCADOR: TELÉFONO DE CONTACTO -->
                     <div class="flex items-center gap-2">
                         <i data-lucide="phone" class="text-amber-400 w-4 h-4"></i>
-                        <p>[ Teléfono / Contacto ]</p>
+                        <p>+593 98 337 9791</p>
                     </div>
                     <!-- MARCADOR: CORREO ELECTRÓNICO -->
                     <div class="flex items-center gap-2">
                         <i data-lucide="mail" class="text-amber-400 w-4 h-4"></i>
-                        <p>[ Correo Electrónico Oficial ]</p>
+                        <p>sincorreo</p>
                     </div>
                 </div>
             </div>
@@ -331,13 +331,13 @@
                 <h4 class="text-amber-400 font-bold text-sm uppercase tracking-wider">Síguenos en Redes</h4>
                 <div class="flex gap-3">
                     <!-- Enlaces a redes -->
-                    <a href="#" class="w-8 h-8 bg-sky-700 hover:bg-amber-500 hover:text-sky-950 transition flex items-center justify-center rounded-full text-white">
+                    <a href="https://www.facebook.com/profile.php?id=100064378251856" target="_blank" rel="noopener noreferrer" class="w-8 h-8 bg-sky-700 hover:bg-amber-500 hover:text-sky-950 transition flex items-center justify-center rounded-full text-white">
                         <i data-lucide="facebook" class="w-4 h-4"></i>
                     </a>
-                    <a href="#" class="w-8 h-8 bg-sky-700 hover:bg-amber-500 hover:text-sky-950 transition flex items-center justify-center rounded-full text-white">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-8 h-8 bg-sky-700 hover:bg-amber-500 hover:text-sky-950 transition flex items-center justify-center rounded-full text-white">
                         <i data-lucide="instagram" class="w-4 h-4"></i>
                     </a>
-                    <a href="#" class="w-8 h-8 bg-sky-700 hover:bg-amber-500 hover:text-sky-950 transition flex items-center justify-center rounded-full text-white">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-8 h-8 bg-sky-700 hover:bg-amber-500 hover:text-sky-950 transition flex items-center justify-center rounded-full text-white">
                         <i data-lucide="youtube" class="w-4 h-4"></i>
                     </a>
                 </div>
@@ -411,6 +411,8 @@
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 modalContenedor.classList.remove('scale-95');
+                // Inicializar iconos dentro del modal de forma segura
+                if (typeof lucide !== 'undefined') lucide.createIcons();
             }, 10);
         }
 
@@ -426,8 +428,14 @@
             if (e.target === modal) cerrarModal();
         });
 
-        // Inicializar los iconos vectoriales cargados por Lucide
-        lucide.createIcons();
+        // Asegurar la inicialización completa de los iconos en el DOM de la página
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.error("Lucide CDN no ha respondido. Verifica tu conexión de red.");
+            }
+        });
     </script>
 </body>
 </html>
